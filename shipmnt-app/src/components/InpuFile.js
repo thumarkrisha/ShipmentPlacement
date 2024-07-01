@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
 import * as XLSX from 'xlsx'
+import { baseurl } from '../url/baseurl'
+import axios from 'axios'
 
 const InpuFile = () => {
+
+    const [selectedOption, setSelectedOption] = useState('');
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
     const [data,setData] = useState(null)
 
@@ -21,10 +29,9 @@ const InpuFile = () => {
 
         reader.readAsBinaryString(file);
     }
-    async function handleConfirm=()=>{
+    async function handleConfirm(){
 
-        const response = 
-
+        const response = await axios.post(`${baseurl}/upload`,{data,selectedOption});
 
     }
     const handleCancle = () =>{
@@ -34,6 +41,27 @@ const InpuFile = () => {
   return (
     <div>
         <input type = "file" onChange={handleFileUpload}></input>
+
+        <label>
+        <input
+          type="radio"
+          value="company"
+          checked={selectedOption === 'company'}
+          onChange={handleOptionChange}
+        />
+        company
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          value="contact"
+          checked={selectedOption === 'contact'}
+          onChange={handleOptionChange}
+        />
+        contact     
+        </label>
+
         {data && (
         <div>
           <h2>Imported Data:</h2>

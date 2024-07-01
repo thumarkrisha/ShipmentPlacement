@@ -21,7 +21,7 @@ const contactSchema = new mongoose.Schema({
     },
 
     CompanyId:{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Number,
         ref: "Company"
     }
 

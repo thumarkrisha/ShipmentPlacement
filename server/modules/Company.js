@@ -2,6 +2,7 @@
 const mongoose = require('mongoose');
 
 const companySchema = new mongoose.Schema({
+    CompanyId : Number,
   CompanyName:{ 
     type:String,
     require:true

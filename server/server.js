@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose =  require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
+const validator = require('express-validator')
 const port = 8000;
 
 dotenv.config()
@@ -24,6 +25,14 @@ mongoose.connect(process.env.MONGODB_URL, {
   }).catch(err => {
     console.error('Error connecting to MongoDB', err);
   });
+
+app.post('/upload',(req,res)=>{
+
+    const role = req.body.selectedOption;
+    const data = req.body.data;
+
+    console.log(role,data);
+})
 
 
 

@@ -5,7 +5,7 @@ const companySchema = new mongoose.Schema({
     CompanyId : Number,
   CompanyName:{ 
     type:String,
-    require:true
+    required:true,
     },
 
     CompanyAddress: String,
@@ -13,12 +13,12 @@ const companySchema = new mongoose.Schema({
     CompanyEmail: String,
     CompanyWebsite: String,
     NoOfEmploy: Number,
-    FoundedDate:date,
+    FoundedDate:Date,
     IndustryType:{
+        type : String,
         enum:[ "Technology", "Finance", "Healthcare", "Retail", "Other"],
-        required:true
+        required:true,
     }
-
   
 });
 

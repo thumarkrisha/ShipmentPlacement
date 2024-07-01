@@ -14,8 +14,9 @@ const contactSchema = new mongoose.Schema({
 
     CompanyPhone: String,
 
-    BirthDate:date,
+    BirthDate:Date,
     ContactType:{
+        type : String,
         enum:[  "Primary", "Secondary", "Other"],
         required:true
     },

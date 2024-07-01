@@ -3,6 +3,8 @@ const mongoose =  require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
 const validator = require('express-validator')
+const CompanyModel = require('./modules/Company')
+const ContactModel = require('./modules/Contact')
 const port = 8000;
 
 dotenv.config()
@@ -26,14 +28,28 @@ mongoose.connect(process.env.MONGODB_URL, {
     console.error('Error connecting to MongoDB', err);
   });
 
-app.post('/upload',(req,res)=>{
-
+  app.post('/upload', async (req, res) => {
     const role = req.body.selectedOption;
     const data = req.body.data;
 
-    console.log(role,data);
-})
+    
 
+        if(role==='company')
+        {
+                const result = await CompanyModel.insertMany(data);
+        }
+        else if(role === 'contact')
+            {
+                const result = await ContactModel.insertMany(data);
+            }
+        
+
+
+    // console.log(role, data);
+    
+    // res.sendStatus(200); 
+  });
+  
 
 
 app.listen(port,()=>{

@@ -7,6 +7,7 @@ const InpuFile = () => {
 
     const [selectedOption, setSelectedOption] = useState('');
 
+
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -31,7 +32,16 @@ const InpuFile = () => {
     }
     async function handleConfirm(){
 
-        const response = await axios.post(`${baseurl}/upload`,{data,selectedOption});
+        try {
+            const response = await axios.post(`${baseurl}/upload`, { data, selectedOption });
+            console.log('Upload successful', response.data);
+
+        
+            
+          } catch (error) {
+            console.error('Error uploading:', error);
+            
+          }
 
     }
     const handleCancle = () =>{
@@ -39,9 +49,9 @@ const InpuFile = () => {
     }
 
   return (
-    <div>
-        <input type = "file" onChange={handleFileUpload}></input>
-
+    <div className='middle'>
+        
+        For What You What to Enter DATA:
         <label>
         <input
           type="radio"
@@ -62,11 +72,17 @@ const InpuFile = () => {
         contact     
         </label>
 
+        <br/>
+        <br></br>
+
+        <input type = "file" onChange={handleFileUpload}></input>
+
         {data && (
         <div>
           <h2>Imported Data:</h2>
-          <table className='width'>
-            
+          <table border={1}>
+            {selectedOption === 'company' ?
+            <div>
             <tr style={{width: '50px',}}>
                 <th> CompanyName</th>
                 <th>CompanyAddress</th>
@@ -77,22 +93,47 @@ const InpuFile = () => {
                 <th>FoundedDate</th>
                 <th>IndustryType</th>
             </tr>
-            
+            {data.map((data)=>
+                (
+                  <tr style={{width: '50px',}}>
+                      <td>{data.CompanyName}</td>
+                      <td>{data.CompanyAddress}</td>
+                      <td>{data.CompanyPhone}</td>
+                      <td>{data.CompanyEmail}</td>
+                      <td>{data.CompanyWebsite}</td>
+                      <td>{data.NoOfEmploy}</td>
+                      <td>{data.FoundedDate}</td>
+                      <td>{data.IndustryType}</td>
+                  </tr>
+                )
+              )}
+              </div>
+            :
+            <div>
+            <tr style={{width: '50px',}}>
+                <th> ContactName</th>
+                <th>ContactEmail</th>
+                <th>ContactPhone</th>
+                <th>BirthDate</th>
+                <th>ContactType</th>
+                <th>CompanyId</th>
+            </tr>
+        
             
           {data.map((data)=>
           (
             <tr style={{width: '50px',}}>
-                <td>{data.CompanyName}</td>
-                <td>{data.CompanyAddress}</td>
-                <td>{data.CompanyPhone}</td>
-                <td>{data.CompanyEmail}</td>
-                <td>{data.CompanyWebsite}</td>
-                <td>{data.NoOfEmploy}</td>
-                <td>{data.FoundedDate}</td>
-                <td>{data.IndustryType}</td>
+                <td>{data.ContactName}</td>
+                <td>{data.ContactEmail}</td>
+                <td>{data.ContactPhone}</td>
+                <td>{data.BirthDate}</td>
+                <td>{data.ContactType}</td>
+                <td>{data.CompanyId}</td>
             </tr>
           )
         )}
+        </div>
+    }
         
           </table>
         <button onClick={handleConfirm}>Upload</button>

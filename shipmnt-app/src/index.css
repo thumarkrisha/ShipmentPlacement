@@ -1,0 +1,27 @@
+.Option{
+
+  margin-top: 50px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.Option label{
+  margin:10px ;
+}
+
+.input{
+  width: auto;
+ 
+}
+
+.table{
+  margin-top: 30px;
+}
+
+.button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}

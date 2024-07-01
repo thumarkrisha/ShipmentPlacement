@@ -32,22 +32,22 @@ mongoose.connect(process.env.MONGODB_URL, {
     const role = req.body.selectedOption;
     const data = req.body.data;
 
-    
+    if (!role || !data) {
+        return res.status(400).json({ error: 'Role and data are required.' });
+    }
 
-        if(role==='company')
-        {
-                const result = await CompanyModel.insertMany(data);
+    try {
+        if (role === 'company') {
+            const result = await CompanyModel.insertMany(data);
+            res.sendStatus(200);
+        } else if (role === 'contact') {
+            const result = await ContactModel.insertMany(data);
+            res.sendStatus(200);
         }
-        else if(role === 'contact')
-            {
-                const result = await ContactModel.insertMany(data);
-            }
-        
-
-
-    // console.log(role, data);
-    
-    // res.sendStatus(200); 
+    } catch (err) {
+        console.error('Error during data insertion:', err);
+        res.status(500).json({ error: 'Internal server error.' });
+    }
   });
   
 

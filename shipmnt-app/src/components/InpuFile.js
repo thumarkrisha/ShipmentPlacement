@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const InpuFile = () => {
 
-    const [selectedOption, setSelectedOption] = useState('');
+    const [selectedOption, setSelectedOption] = useState('company');
 
 
   const handleOptionChange = (event) => {
@@ -36,6 +36,8 @@ const InpuFile = () => {
             const response = await axios.post(`${baseurl}/upload`, { data, selectedOption });
             console.log('Upload successful', response.data);
 
+            
+
         
             
           } catch (error) {
@@ -50,7 +52,7 @@ const InpuFile = () => {
 
   return (
     <div className='middle'>
-        
+        <div className='Option'>
         For What You What to Enter DATA:
         <label>
         <input
@@ -58,6 +60,7 @@ const InpuFile = () => {
           value="company"
           checked={selectedOption === 'company'}
           onChange={handleOptionChange}
+          
         />
         company
       </label>
@@ -71,15 +74,15 @@ const InpuFile = () => {
         />
         contact     
         </label>
+        </div>
 
         <br/>
         <br></br>
 
-        <input type = "file" onChange={handleFileUpload}></input>
+        <input  className="input" type = "file" onChange={handleFileUpload}></input>
 
         {data && (
-        <div>
-          <h2>Imported Data:</h2>
+        <div className='table'>
           <table border={1}>
             {selectedOption === 'company' ?
             <div>
@@ -136,8 +139,10 @@ const InpuFile = () => {
     }
         
           </table>
+          <div className='button'>
         <button onClick={handleConfirm}>Upload</button>
         <button onClick={handleCancle}>Cancel</button>
+        </div>
         </div>
       )}
     </div>

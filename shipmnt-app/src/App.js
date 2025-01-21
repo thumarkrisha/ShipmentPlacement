@@ -8,7 +8,7 @@ function App() {
       Welcome to the Git GitHub session.
           Krisha Thumar here....
 
-          branch2 here
+          branch2 here welcome
       <InpuFile/>
     </div>
   );

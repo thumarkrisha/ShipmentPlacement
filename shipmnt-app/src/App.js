@@ -7,6 +7,8 @@ function App() {
     <div className="App">
       Welcome to the Git GitHub session.
           Krisha Thumar here....
+
+          branch2 here
       <InpuFile/>
     </div>
   );
